@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+        --color-clifford: #da373d;
+      }
+    </style>
+</head>
+
+<body class="bg-[#0B0D17] text-white">
+    <header class="p-4 flex justify-center">
+        <h1 class="text-[#FFE81F] text-3xl font-bold">THE STAR WARS</h1>
+    </header>
+
+    <main class="p-4 max-w-7xl mx-auto flex flex-col gap-9">
+        <section>
+            <h3 class="text-xl font-semibold text-[#FFE81F] mb-3">PEOPLE</h3>
+            <div id="people" class="grid sm:grid-cols-3 gap-5"></div>
+        </section>
+
+        <section>
+            <h3 class="text-xl font-semibold text-[#FFE81F] mb-3">PLANETS</h3>
+            <div id="planets" class="grid sm:grid-cols-3 gap-5"></div>
+        </section>
+
+        <section>
+            <h3 class="text-xl font-semibold text-[#FFE81F] mb-3">FILMS</h3>
+            <div id="films" class="grid sm:grid-cols-3 gap-5"></div>
+        </section>
+
+        <section>
+            <h3 class="text-xl font-semibold text-[#FFE81F] mb-3">SPECIES</h3>
+            <div id="species" class="grid sm:grid-cols-3 gap-5"></div>
+        </section>
+
+        <section>
+            <h3 class="text-xl font-semibold text-[#FFE81F] mb-3">VEHICLES</h3>
+            <div id="vehicles" class="grid sm:grid-cols-3 gap-5"></div>
+        </section>
+
+        <section>
+            <h3 class="text-xl font-semibold text-[#FFE81F] mb-3">STARSHIPS</h3>
+            <div id="starships" class="grid sm:grid-cols-3 gap-5"></div>
+        </section>
+    </main>
+
+    <script>
+
+        const people = document.getElementById("people");
+        const planets = document.getElementById("planets");
+        const films = document.getElementById("films");
+        const species = document.getElementById("species");
+        const vehicles = document.getElementById("vehicles");
+        const starships = document.getElementById("starships");
+
+
+        async function peopleFetch() {
+            try {
+                await fetch("https://swapi.dev/api/people/")
+                    .then(response => response.json())
+                    .then(peopleData => {
+                        console.log(peopleData.results)
+
+                        peopleData.results.forEach(data => {
+
+                            let div = document.createElement("div")
+                            div.classList.add("bg-[#252A40]", "rounded-3xl", "p-4")
+
+                            let name = document.createElement("p")
+                            name.innerHTML = `<b>NAME:</b> ${data.name}`
+                            div.appendChild(name)
+
+                            let birth_year = document.createElement("p")
+                            birth_year.innerHTML = `<b>BIRTH YEAR:</b> ${data.birth_year}`
+                            div.appendChild(birth_year)
+
+                            let gender = document.createElement("p")
+                            gender.innerHTML = `<b>GENDER:</b> ${data.gender}`
+                            div.appendChild(gender)
+
+                            let height = document.createElement("p")
+                            height.innerHTML = `<b>HEIGHT:</b> ${data.height}`
+                            div.appendChild(height)
+
+                            let mass = document.createElement("p")
+                            mass.innerHTML = `<b>MASS:</b> ${data.mass}`
+                            div.appendChild(mass)
+
+                            let hair_color = document.createElement("p")
+                            hair_color.innerHTML = `<b>HAIR COLOR:</b> ${data.hair_color}`
+                            div.appendChild(hair_color)
+
+                            let eye_color = document.createElement("p")
+                            eye_color.innerHTML = `<b>EYE COLOR:</b> ${data.eye_color}`
+                            div.appendChild(eye_color)
+
+                            let skin_color = document.createElement("p")
+                            skin_color.innerHTML = `<b>SKIN COLOR:</b> ${data.skin_color}`
+                            div.appendChild(skin_color)
+
+                            people.appendChild(div)
+                        });
+
+                    })
+
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+
+        async function planetsFetch() {
+            try {
+                await fetch("https://swapi.dev/api/planets/")
+                    .then(response => response.json())
+                    .then(planetsData => {
+                        console.log(planetsData.results)
+
+                        planetsData.results.forEach(data => {
+
+                            let div = document.createElement("div")
+                            div.classList.add("bg-[#252A40]", "rounded-3xl", "p-4")
+
+                            let name = document.createElement("p")
+                            name.innerHTML = `<b>PLANETS NAME:</b> ${data.name}`
+                            div.appendChild(name)
+
+                            let terrain = document.createElement("p")
+                            terrain.innerHTML = `<b>TERRAIN:</b> ${data.terrain}`
+                            div.appendChild(terrain)
+
+                            let diameter = document.createElement("p")
+                            diameter.innerHTML = `<b>DIAMETER:</b> ${data.diameter}`
+                            div.appendChild(diameter)
+
+                            let gravity = document.createElement("p")
+                            gravity.innerHTML = `<b>GRAVITY:</b> ${data.gravity}`
+                            div.appendChild(gravity)
+
+                            let population = document.createElement("p")
+                            population.innerHTML = `<b>POPULATION:</b> ${data.population}`
+                            div.appendChild(population)
+
+                            let orbital_period = document.createElement("p")
+                            orbital_period.innerHTML = `<b>ORBITAL PERIOD:</b> ${data.orbital_period}`
+                            div.appendChild(orbital_period)
+
+                            let rotation_period = document.createElement("p")
+                            rotation_period.innerHTML = `<b>ROTATION PERIOD:</b> ${data.rotation_period}`
+                            div.appendChild(rotation_period)
+
+                            let surface_water = document.createElement("p")
+                            surface_water.innerHTML = `<b>SURFACE WATER:</b> ${data.surface_water}`
+                            div.appendChild(surface_water)
+
+                            planets.appendChild(div)
+                        });
+                    })
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+
+        async function filmsFetch() {
+            try {
+                await fetch("https://swapi.dev/api/films/")
+                    .then(response => response.json())
+                    .then(filmsData => {
+                        console.log(filmsData.results)
+
+                        filmsData.results.forEach(data => {
+
+                            let div = document.createElement("div")
+                            div.classList.add("bg-[#252A40]", "rounded-3xl", "p-4")
+
+                            let title = document.createElement("p")
+                            title.innerHTML = `<b>TITLE:</b> ${data.title}`
+                            div.appendChild(title)
+
+                            let opening_crawl = document.createElement("p")
+                            opening_crawl.innerHTML = `<b>OPENING CRAWL:</b> ${data.opening_crawl}`
+                            div.appendChild(opening_crawl)
+
+                            let director = document.createElement("p")
+                            director.innerHTML = `<b>DIRECTOR:</b> ${data.director}`
+                            div.appendChild(director)
+
+                            let producer = document.createElement("p")
+                            producer.innerHTML = `<b>PRODUCER:</b> ${data.producer}`
+                            div.appendChild(producer)
+
+                            let release_date = document.createElement("p")
+                            release_date.innerHTML = `<b>RELEASE DATE:</b> ${data.release_date}`
+                            div.appendChild(release_date)
+
+                            let episode_id = document.createElement("p")
+                            episode_id.innerHTML = `<b>EPISODE ID:</b> ${data.episode_id}`
+                            div.appendChild(episode_id)
+
+                            films.appendChild(div)
+                        });
+                    })
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+
+        async function speciesFetch() {
+            try {
+                await fetch("https://swapi.dev/api/species/")
+                    .then(response => response.json())
+                    .then(speciesData => {
+                        console.log(speciesData.results)
+
+                        speciesData.results.forEach(data => {
+
+                            let div = document.createElement("div")
+                            div.classList.add("bg-[#252A40]", "rounded-3xl", "p-4")
+
+                            let name = document.createElement("p")
+                            name.innerHTML = `<b>NAME:</b> ${data.name}`
+                            div.appendChild(name)
+
+                            let average_height = document.createElement("p")
+                            average_height.innerHTML = `<b>AVERAGE HEIGHT:</b> ${data.average_height}`
+                            div.appendChild(average_height)
+
+                            let average_lifespan = document.createElement("p")
+                            average_lifespan.innerHTML = `<b>AVERAGE LIFESPAN:</b> ${data.average_lifespan}`
+                            div.appendChild(average_lifespan)
+
+                            let classification = document.createElement("p")
+                            classification.innerHTML = `<b>CLASSIFICATION:</b> ${data.classification}`
+                            div.appendChild(classification)
+
+                            let designation = document.createElement("p")
+                            designation.innerHTML = `<b>DESIGNATION:</b> ${data.designation}`
+                            div.appendChild(designation)
+
+                            let eye_colors = document.createElement("p")
+                            eye_colors.innerHTML = `<b>EYE COLORS:</b> ${data.eye_colors}`
+                            div.appendChild(eye_colors)
+
+                            let hair_colors = document.createElement("p")
+                            hair_colors.innerHTML = `<b>HAIR COLORS:</b> ${data.hair_colors}`
+                            div.appendChild(hair_colors)
+
+                            let language = document.createElement("p")
+                            language.innerHTML = `<b>LANGUAGE:</b> ${data.language}`
+                            div.appendChild(language)
+
+                            let skin_colors = document.createElement("p")
+                            skin_colors.innerHTML = `<b>SKIN COLORS:</b> ${data.skin_colors}`
+                            div.appendChild(skin_colors)
+
+                            species.appendChild(div)
+                        });
+                    })
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+
+        async function vehiclesFetch() {
+            try {
+                await fetch("https://swapi.dev/api/vehicles/")
+                    .then(response => response.json())
+                    .then(vehiclesData => {
+                        console.log(vehiclesData.results)
+
+                        vehiclesData.results.forEach(data => {
+
+                            let div = document.createElement("div")
+                            div.classList.add("bg-[#252A40]", "rounded-3xl", "p-4")
+
+                            let name = document.createElement("p")
+                            name.innerHTML = `<b>NAME:</b> ${data.name}`
+                            div.appendChild(name)
+
+                            let model = document.createElement("p")
+                            model.innerHTML = `<b>MODEL:</b> ${data.model}`
+                            div.appendChild(model)
+
+                            let manufacturer = document.createElement("p")
+                            manufacturer.innerHTML = `<b>MANUFACTURER:</b> ${data.manufacturer}`
+                            div.appendChild(manufacturer)
+
+                            let cargo_capacity = document.createElement("p")
+                            cargo_capacity.innerHTML = `<b>CARGO CAPACITY:</b> ${data.cargo_capacity}`
+                            div.appendChild(cargo_capacity)
+
+                            let consumables = document.createElement("p")
+                            consumables.innerHTML = `<b>CONSUMABLES:</b> ${data.consumables}`
+                            div.appendChild(consumables)
+
+                            let cost_in_credits = document.createElement("p")
+                            cost_in_credits.innerHTML = `<b>COST IN CREDITS:</b> ${data.cost_in_credits}`
+                            div.appendChild(cost_in_credits)
+
+                            let crew = document.createElement("p")
+                            crew.innerHTML = `<b>CREW:</b> ${data.crew}`
+                            div.appendChild(crew)
+
+                            let length = document.createElement("p")
+                            length.innerHTML = `<b>LENGTH:</b> ${data.length}`
+                            div.appendChild(length)
+
+                            let passengers = document.createElement("p")
+                            passengers.innerHTML = `<b>PASSENGERS:</b> ${data.passengers}`
+                            div.appendChild(passengers)
+
+                            let max_atmosphering_speed = document.createElement("p")
+                            max_atmosphering_speed.innerHTML = `<b>MAX ATMOSPHERING SPEED:</b> ${data.max_atmosphering_speed}`
+                            div.appendChild(max_atmosphering_speed)
+
+                            let vehicle_class = document.createElement("p")
+                            vehicle_class.innerHTML = `<b>VEHICLE CLASS:</b> ${data.vehicle_class}`
+                            div.appendChild(vehicle_class)
+
+                            vehicles.appendChild(div)
+                        });
+                    })
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+
+        async function starshipsFetch() {
+            try {
+                await fetch("https://swapi.dev/api/starships/")
+                    .then(response => response.json())
+                    .then(starshipsData => {
+                        console.log(starshipsData.results)
+
+                        starshipsData.results.forEach(data => {
+
+                            let div = document.createElement("div")
+                            div.classList.add("bg-[#252A40]", "rounded-3xl", "p-4")
+
+                            let name = document.createElement("p")
+                            name.innerHTML = `<b>NAME:</b> ${data.name}`
+                            div.appendChild(name)
+
+                            let model = document.createElement("p")
+                            model.innerHTML = `<b>MODEL:</b> ${data.model}`
+                            div.appendChild(model)
+
+                            let manufacturer = document.createElement("p")
+                            manufacturer.innerHTML = `<b>MANUFACTURER:</b> ${data.manufacturer}`
+                            div.appendChild(manufacturer)
+
+                            let cargo_capacity = document.createElement("p")
+                            cargo_capacity.innerHTML = `<b>CARGO CAPACITY:</b> ${data.cargo_capacity}`
+                            div.appendChild(cargo_capacity)
+
+                            let consumables = document.createElement("p")
+                            consumables.innerHTML = `<b>CONSUMABLES:</b> ${data.consumables}`
+                            div.appendChild(consumables)
+
+                            let cost_in_credits = document.createElement("p")
+                            cost_in_credits.innerHTML = `<b>COST IN CREDITS:</b> ${data.cost_in_credits}`
+                            div.appendChild(cost_in_credits)
+
+                            let crew = document.createElement("p")
+                            crew.innerHTML = `<b>CREW:</b> ${data.crew}`
+                            div.appendChild(crew)
+
+                            let length = document.createElement("p")
+                            length.innerHTML = `<b>LENGTH:</b> ${data.length}`
+                            div.appendChild(length)
+
+                            let passengers = document.createElement("p")
+                            passengers.innerHTML = `<b>PASSENGERS:</b> ${data.passengers}`
+                            div.appendChild(passengers)
+
+                            let max_atmosphering_speed = document.createElement("p")
+                            max_atmosphering_speed.innerHTML = `<b>MAX ATMOSPHERING SPEED:</b> ${data.max_atmosphering_speed}`
+                            div.appendChild(max_atmosphering_speed)
+
+                            let starship_class = document.createElement("p")
+                            starship_class.innerHTML = `<b>STARSHIP CLASS:</b> ${data.starship_class}`
+                            div.appendChild(starship_class)
+
+                            let hyperdrive_rating = document.createElement("p")
+                            hyperdrive_rating.innerHTML = `<b>HYPERDRIVE RATING:</b> ${data.hyperdrive_rating}`
+                            div.appendChild(hyperdrive_rating)
+
+                            let MGLT = document.createElement("p")
+                            MGLT.innerHTML = `<b>MGLT:</b> ${data.MGLT}`
+                            div.appendChild(MGLT)
+
+                            starships.appendChild(div)
+                        });
+                    })
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+
+        peopleFetch();
+        planetsFetch();
+        filmsFetch();
+        speciesFetch();
+        vehiclesFetch();
+        starshipsFetch();
+
+    </script>
+</body>
+
+</html>
